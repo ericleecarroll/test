@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 /**
  * Common pattern for testing if a method throws the expected exception
- * 
+ *
  * Created by Eric on 7/3/2016.
  */
 public class Exceptions {
