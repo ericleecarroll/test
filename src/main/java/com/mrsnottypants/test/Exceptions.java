@@ -37,8 +37,19 @@ public class Exceptions {
      * @param <T> Type of the parameter passed to the consumer
      * @return true if expected exception is thrown
      */
-    public static <T> boolean isIllegal(final Consumer<T> consumer, final T t) {
+    public static <T> boolean isIllegalArgument(final Consumer<T> consumer, final T t) {
         return isExpected(consumer, t, IllegalArgumentException.class);
+    }
+
+    /**
+     * Returns true if calling consumer on t will result in an IllegalStateException
+     * @param consumer Method we expect to throw an exception
+     * @param t Parameter passed to the consumer
+     * @param <T> Type of the parameter passed to the consumer
+     * @return true if expected exception is thrown
+     */
+    public static <T> boolean isIllegalState(final Consumer<T> consumer, final T t) {
+        return isExpected(consumer, t, IllegalStateException.class);
     }
 
     /**
@@ -75,7 +86,7 @@ public class Exceptions {
     }
 
     /**
-     * Returns true if calling bi-consumer on t will result in an IllegalArgumentException
+     * Returns true if calling bi-consumer on t and u will result in an IllegalArgumentException
      * @param consumer Method we expect to throw an exception
      * @param t 1st parameter passed to the consumer
      * @param u 2nd parameter passed to the consumer
@@ -83,12 +94,25 @@ public class Exceptions {
      * @param <U> Type of the 2nd parameter passed to the consumer
      * @return true if expected exception is thrown
      */
-    public static <T, U> boolean isIllegal(final BiConsumer<T, U> consumer, final T t, final U u) {
+    public static <T, U> boolean isIllegalArgument(final BiConsumer<T, U> consumer, final T t, final U u) {
         return isExpected(consumer, t, u, IllegalArgumentException.class);
     }
 
     /**
-     * Returns true if calling bi-consumer on t will result in an IndexOutOfBoundsException
+     * Returns true if calling bi-consumer on t and u will result in an IllegalStateException
+     * @param consumer Method we expect to throw an exception
+     * @param t 1st parameter passed to the consumer
+     * @param u 2nd parameter passed to the consumer
+     * @param <T> Type of the 1st parameter passed to the consumer
+     * @param <U> Type of the 2nd parameter passed to the consumer
+     * @return true if expected exception is thrown
+     */
+    public static <T, U> boolean isIllegalState(final BiConsumer<T, U> consumer, final T t, final U u) {
+        return isExpected(consumer, t, u, IllegalStateException.class);
+    }
+
+    /**
+     * Returns true if calling bi-consumer on t and u will result in an IndexOutOfBoundsException
      * @param consumer Method we expect to throw an exception
      * @param t 1st parameter passed to the consumer
      * @param u 2nd parameter passed to the consumer
@@ -115,6 +139,16 @@ public class Exceptions {
             expected = (ex.getClass().equals(e));
         }
         return expected;
+    }
+
+    /**
+     * Returns true if calling supplier will result in an IllegalStateException
+     * @param consumer Method we expect to throw an exception
+     * @param <T> Type of the parameter passed to the consumer
+     * @return true if expected exception is thrown
+     */
+    public static <T> boolean isIllegalState(final Supplier<T> consumer) {
+        return isExpected(consumer, IllegalStateException.class);
     }
 
     /**
